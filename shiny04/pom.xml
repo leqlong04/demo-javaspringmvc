@@ -8,10 +8,10 @@
 		<version>3.5.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>vn.javaspring</groupId>
-	<artifactId>shiny04</artifactId>
+	<groupId>vn.shiny</groupId>
+	<artifactId>laptopshop</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>shiny04</name>
+	<name>laptopshop</name>
 	<description>Demo</description>
 	<url/>
 	<licenses>

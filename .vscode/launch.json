@@ -2,13 +2,28 @@
     "configurations": [
         {
             "type": "java",
+            "name": "LaptopshopApplication",
+            "request": "launch",
+            "mainClass": "vn.shiny.laptopshop.LaptopshopApplication",
+            "projectName": "shiny04"
+        },
+        {
+            "type": "java",
+            "name": "Shiny04Application",
+            "request": "launch",
+            "mainClass": "vn.shiny.laptopshop.Shiny04Application",
+            "projectName": "shiny04"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-Shiny04Application<shiny04>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "mainClass": "vn.javaspring.shiny04.Shiny04Application",
             "projectName": "shiny04",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=53794 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=shiny04"
         }
     ]
 }
