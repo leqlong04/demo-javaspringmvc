@@ -1,4 +1,4 @@
-package vn.javaspring.shiny04;
+package vn.javaspring.laptopshop;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

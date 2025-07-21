@@ -1,4 +1,4 @@
-package vn.javaspring.shiny04;
+package vn.javaspring.laptopshop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
