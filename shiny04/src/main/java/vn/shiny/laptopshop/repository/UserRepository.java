@@ -12,5 +12,10 @@ import vn.shiny.laptopshop.domain.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     User save(User user);
 
+    void deleteById(Long id);
+
     List<User> findByEmail(String email);
+
+    List<User> findAll();
+
 }
