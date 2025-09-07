@@ -1,5 +1,9 @@
-package vn.shiny.laptopshop.controller;
+package vn.shiny.laptopshop.controller.admin;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -10,8 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.ServletContext;
 import vn.shiny.laptopshop.domain.User;
 import vn.shiny.laptopshop.repository.UserRepository;
 import vn.shiny.laptopshop.service.*;
@@ -21,10 +27,11 @@ public class UserController {
 
     // DI
     private final UserService userService;
+    private final UploadService uploadService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UploadService uploadService) {
         this.userService = userService;
-
+        this.uploadService = uploadService;
     }
 
     @RequestMapping("/")
@@ -39,7 +46,7 @@ public class UserController {
     public String getUserPage(Model model) {
         List<User> users = this.userService.getAllUsers();
         model.addAttribute("users1", users);
-        return "/admin/user/table-user";
+        return "/admin/user/show";
     }
 
     @RequestMapping("/admin/user/{userId}")
@@ -47,19 +54,20 @@ public class UserController {
         User user = this.userService.getUserById(userId);
         model.addAttribute("user", user);
         model.addAttribute("userId", userId);
-        return "/admin/user/user-detail";
+        return "/admin/user/detail";
     }
 
-    @RequestMapping("/admin/user/create")
+    @GetMapping("/admin/user/create")
     public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
         return "/admin/user/create";
     }
 
-    @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
-    public String createUserPage(Model model, @ModelAttribute("newUser") User user) {
-
-        this.userService.handleSaveUser(user);
+    @PostMapping("/admin/user/create")
+    public String createUserPage(Model model, @ModelAttribute("newUser") User user,
+            @RequestParam("hoidanitFile") MultipartFile file) {
+        String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
+        // this.userService.handleSaveUser(user);
         return "redirect:/admin/user";
     }
 
@@ -67,7 +75,7 @@ public class UserController {
     public String updateUserPage(Model model, @PathVariable Long userId) {
         User currUser = this.userService.getUserById(userId);
         model.addAttribute("newUser", currUser);
-        return "admin/user/user-update";
+        return "admin/user/update";
     }
 
     @PostMapping("/admin/user/update")
